@@ -2,7 +2,7 @@
 ## Introdução: apresentação do projeto
 O acesso à informação é essencial para o exercício da cidadania, mas muitos cidadãos, especialmente os mais vulneráveis, enfrentam dificuldades para encontrar e compreender dados sobre benefícios públicos, que hoje estão dispersos em diferentes sites, escritos em linguagem técnica e envoltos em burocracia. Para solucionar essa barreira, o projeto Cidadania Ativa propõe a criação de um chatbot integrado ao WhatsApp que utiliza inteligência artificial para centralizar e simplificar essas informações, facilitando o entendimento dos direitos disponíveis, promovendo autonomia ao cidadão e fortalecendo a relação entre a população e o poder público.
 
-## Tecnologias ultilizadas 
+##Tecnologias ultilizadas 
 ### Inteligência Artificial e Processamento de Linguagem
 -  Gemini (Modelo de Inteligência Artificial): Atuou como o núcleo cognitivo do chatbot. É responsável por processar as entradas textuais dos usuários e gerar respostas em linguagem natural. O modelo é acessado por meio da API Gemini.
    * Nota: Inicialmente, o projeto utilizou a versão gratuita do Gemini, mas devido a limitações (como o número de tokens e capacidade de resposta), foi migrado para a versão paga para garantir maior estabilidade e qualidade.
@@ -22,4 +22,4 @@ O acesso à informação é essencial para o exercício da cidadania, mas muitos
 ### Metodologia de Desenvolvimento
 - Modelo Metodológico Híbrido: O desenvolvimento do sistema integrou o framework Scrum com técnicas de priorização da Matriz de Eisenhower. Essa abordagem foi escolhida para garantir flexibilidade, ciclos contínuos de refinamento e gestão eficiente das prioridades.
 
-## Apresentação do sistema 
+##Apresentação do sistema 
