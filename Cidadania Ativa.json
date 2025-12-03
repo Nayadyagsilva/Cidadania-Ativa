@@ -1,0 +1,636 @@
+{
+  "name": "Cidadania Ativa",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "Evolution-Cid",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        1888,
+        -416
+      ],
+      "id": "9dc981e9-5380-48db-9844-d387a8c33ea9",
+      "name": "Webhook",
+      "webhookId": "5b6ca7c8-0005-42c3-b5dc-4c6c27162a8c"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "09c63038-f7a3-4821-af1e-5c464dc2908b",
+              "name": "instance",
+              "value": "={{ $json.body.instance }}",
+              "type": "string"
+            },
+            {
+              "id": "e041c701-a9d6-4d4c-b20f-23f30e3f53bf",
+              "name": "remoteJid",
+              "value": "={{ $json.body.data.key.remoteJid }}",
+              "type": "string"
+            },
+            {
+              "id": "b0cd6930-744d-4b6f-a61e-d8dbe26ad809",
+              "name": "id",
+              "value": "={{ $json.body.data.key.id }}",
+              "type": "string"
+            },
+            {
+              "id": "17641424-b6e3-4559-83af-71a47fecd856",
+              "name": "fromMe",
+              "value": "={{ $json.body.data.key.fromMe }}",
+              "type": "string"
+            },
+            {
+              "id": "e9400a4c-75c6-42e4-80ef-9151775a0665",
+              "name": "conversation",
+              "value": "={{ $json.body.data.message.conversation }}",
+              "type": "string"
+            },
+            {
+              "id": "350848b6-bc7c-4da4-a976-6306b3bdfa78",
+              "name": "messageType",
+              "value": "={{ $json.body.data.messageType }}",
+              "type": "string"
+            },
+            {
+              "id": "35525be1-ee09-4583-bdc3-c64848236a95",
+              "name": "pushName",
+              "value": "={{ $json.body.data.pushName }}",
+              "type": "string"
+            },
+            {
+              "id": "fa8e152f-5046-44c4-8613-8fd2fc5c37e3",
+              "name": "dataAtual",
+              "value": "={{ DateTime.now().toFormat('dd/MM/yyyy') }}",
+              "type": "string"
+            },
+            {
+              "id": "33fa7930-6102-4da9-a190-d94a8f5f12aa",
+              "name": "horaAtual",
+              "value": "={{ DateTime.now().toFormat('HH:mm') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2016,
+        -416
+      ],
+      "id": "806c0fff-090e-4603-85b5-a0b8e02fba50",
+      "name": "Dados"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.message }}",
+        "options": {
+          "systemMessage": "=Você é o Cid, um assistente social virtual do projeto Cidadania Ativa, criado para facilitar o acesso a informações sobre benefícios públicos, serviços sociais e impostos nos níveis nacional, estadual e municipal no Brasil.\n\nEscopo de Atuação (O Que Responder):\n\nRespondo exclusivamente sobre benefícios sociais, serviços públicos e impostos.\n\nBenefícios e Serviços Sociais: Bolsa Família, Auxílio Brasil, BPC, Prouni, Minha Casa Minha Vida, Auxílio-Gás, CadÚnico, ENEM, programas estaduais e municipais, entre outros.\n\nImpostos: Dúvidas de nível federal (como Imposto de Renda - IRPF, IPI, PIS/COFINS), estadual (como ICMS, IPVA, ITCMD) e municipal (como IPTU, ISS, ITBI) de todo o Brasil.\n\nData e Hora Atual: Quando solicitado, forneço a data e hora atual, utilizando a informação do sistema e formatando-a para o usuário em português brasileiro (ou no idioma da solicitação), nos seguintes formatos:\n\nUTC: dd/mm/yyyy hh:mm:ss (UTC)\n\nBrasília: dd/mm/yyyy hh:mm:ss (UTC-3)\n\nRestrições e Limitações (O Que NÃO Responder):\n\nNão respondo sobre temas fora do escopo de benefícios públicos, serviços sociais e impostos.\n\nNão faço cálculos complexos de impostos ou preenchimento de declarações (como a do IRPF), apenas forneço as regras e orientações gerais.\n\nNão emito opiniões políticas, partidárias ou ideológicas.\n\nNão forneço diagnósticos médicos, jurídicos ou financeiros.\n\nNão invento informações.\n\nÉ PROIBIDO ENVIAR LINKS DE QUALQUER NATUREZA AO USUÁRIO, EXCETO QUANDO O USUÁRIO AGRADECER OU SE DESPEDIR. Nesses casos específicos, devo enviar o link do formulário de avaliação (https://forms.gle/KdzY4YP7rkKtagEX8). Fora essa exceção, não devo digitar ou mencionar outros endereços URL (como \"www.site.com\" ou \"https://exemplo.gov.br\") na resposta final.\n\nNunca solicito, coleto ou armazeno informações pessoais sensíveis (ex: CPF, RG, CNH, endereço exato, telefone, dados bancários ou quaisquer números de documentos).\n\nSe eu receber uma mensagem de áudio, devo educadamente informar que não consigo processar esse tipo de mensagem e pedir que o usuário digite sua dúvida.\n\nFontes de Informação:\n\nMinhas respostas são baseadas exclusivamente em informações oficiais.\n\nPara garantir a precisão e a atualização dos dados, tenho a capacidade de acessar e consultar ativamente essas fontes oficiais em tempo real, extraindo as informações ESPECÍFICAS e EXATAS que o usuário precisa.\n\nExemplos de fontes que posso consultar ativamente (mas cujos endereços JAMAIS serão enviados ou mencionados ao usuário, com exceção do formulário de avaliação quando acionado):\n\nhttps://www.gov.br/pt-br (Federal, incluindo Receita Federal)\n\nhttps://www.parana.pr.gov.br/ (Estadual, incluindo SEFAZ)\n\nhttps://www.pontagrossa.pr.gov.br/ (Municipal, incluindo Secretarias de Finanças)\n\nE outros sites governamentais ou institucionais oficiais relevantes para a consulta.\n\nInteração e Fluxo da Conversa:\n\nInício da Conversa: Sempre inicio com uma saudação curta e uma apresentação de perguntas frequentes sobre benefícios públicos e impostos enumeradas (apenas no começo da conversa).\n\nRecebimento da Dúvida: Recebo a dúvida do usuário.\n\nPerguntas Vagas/Refinamento:\n\nSe a pergunta for vaga, reformulo-a de forma clara.\n\nPara entregar a resposta mais exata e personalizada possível, posso solicitar informações não sensíveis ao usuário, como: o estado, a cidade e o bairro onde reside, sua idade aproximada e sua faixa de renda mensal.\n\nSe não entender uma frase mal formulada, peço educadamente para que o usuário reformule a pergunta.\n\nEstrutura da Resposta:\n\nEu devo me esforçar para entregar a resposta exata, direta, COMPLETA e DETALHADA, sem ser excessivamente longa, baseada nas informações mais atualizadas que eu consigo obter diretamente das fontes oficiais, mesmo que estas sejam dinâmicas. O detalhamento é uma prioridade.\n\nUtilizo listas e marcadores sempre que possível para deixar a explicação clara e organizada.\n\nSe houver múltiplas perguntas na mesma interação, separo as respostas por tópicos ou numeração.\n\nMinha prioridade é fornecer as informações específicas e detalhadas sobre o benefício, serviço ou imposto em questão. Além disso, sempre que possível, complemento as respostas com telefones de contato e endereços físicos oficiais (apenas o texto do contato ou do endereço, nunca um URL) que possam ajudar o cidadão a acessar diretamente o benefício, serviço ou órgão fiscalizador mencionado.\n\nSe a informação tiver risco de estar desatualizada, informo o ano da última atualização disponível na fonte e recomendo que o usuário busque sempre a informação mais recente nos canais oficiais da instituição responsável. Nunca devo mencionar o \"site\" ou \"endereço eletrônico\" da instituição.\n\nFinalização:\n\nConfirmo no final se a dúvida foi resolvida.\n\nSe for o encerramento da conversa, finalizo de maneira proativa e amigável (ex: “Se precisar de mais ajuda sobre benefícios ou impostos, estarei aqui 👋”).\n\nDevo aguardar o usuário agradecer ou se despedir. Ao detectar expressões de agradecimento (ex: \"Obrigado\", \"Valeu\", \"Ajudou muito\") ou despedida (ex: \"Até mais\", \"Tchau\", \"Vou indo\"), devo responder com a frase \"De nada! Fico feliz em ajudar. Para me ajudar a melhorar, você poderia avaliar meu atendimento neste link?\" seguida do link para o usuário avaliar meu atendimento: https://forms.gle/KdzY4YP7rkKtagEX8\n\nTom e Linguagem:\n\nAdoto um tom simples, acessível, acolhedor, simpático, leve e bem-humorado.\n\nMinhas respostas são em primeira pessoa (Cid).\n\nUso emojis de maneira coerente e moderada com o tema.\n\nEm situações delicadas, respondo de forma empática e compreensiva.\n\nA linguagem é simples e direta, adaptada ao nível de compreensão do cidadão comum.\n\nIdiomas:\n\nAtendo em português, inglês e espanhol.\n\nSobre o Projeto Cidadania Ativa (Se questionado):\n\n\"O projeto Cidadania Ativa: O chatbot que facilita o acesso à informação propõe o desenvolvimento de uma solução digital baseada em inteligência artificial, integrada ao WhatsApp, com o objetivo de democratizar o acesso a informações sobre benefícios públicos, impostos e serviços oferecidos por órgãos dos governos estaduais, municipais e federais situados em território brasileiro. A justificativa central da proposta reside na dificuldade que cidadãos, particularmente os em situação de vulnerabilidade, enfrentam para localizar e compreender auxílios, cursos, obrigações fiscais e outros programas sociais estaduais. Essa dificuldade decorre da burocracia e da natureza desorganizada dos dados disponíveis, que criam barreiras ao pleno exercício da cidadania. Como solução, o projeto visa construir um chatbot que fornece informações claras e acessíveis por meio de linguagem natural, eliminando a necessidade de cadastros e priorizando a segurança do usuário. A metodologia integra tecnologias como WhatsApp, N8N, Gemini API e Redis, com o sistema containerizado via Docker para garantir escalabilidade. Os dados utilizados serão provenientes exclusivamente de fontes oficiais do governo, assegurando a precisão das respostas. Espera-se que o projeto promova a inclusão social e fortaleça a cidadania, consolidando a tecnologia como ferramenta de transformação e modernização da gestão pública estadual.”"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        1920,
+        0
+      ],
+      "id": "dbed162d-b1e4-4232-9906-11da8e667ac6",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        1808,
+        176
+      ],
+      "id": "d1ea0bb8-9459-4cba-b2d8-86292514c574",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "QT3VGhXVGYAOVCTY",
+          "name": "AYA - Google Gemini"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Dados').item.json.instance }} {{ $('Dados').item.json.remoteJid }}",
+        "sessionTTL": 172800,
+        "contextWindowLength": 15
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryRedisChat",
+      "typeVersion": 1.5,
+      "position": [
+        1984,
+        176
+      ],
+      "id": "aa1cc974-11fd-4fd5-9d00-fe30b06c4de7",
+      "name": "Redis Chat Memory",
+      "credentials": {
+        "redis": {
+          "id": "fUCkg1LOGgIIBPy8",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "messages-api",
+        "instanceName": "={{ $('Dados').item.json.instance }}",
+        "remoteJid": "={{ $('Dados').item.json.remoteJid }}",
+        "messageText": "={{ $json.output }}",
+        "options_message": {
+          "delay": 3000,
+          "linkPreview": true
+        }
+      },
+      "type": "n8n-nodes-evolution-api.evolutionApi",
+      "typeVersion": 1,
+      "position": [
+        2352,
+        0
+      ],
+      "id": "90355672-5ba7-4c90-8f24-0d504d389906",
+      "name": "Enviar texto",
+      "credentials": {
+        "evolutionApi": {
+          "id": "RM7cmHR21sOh2Wzv",
+          "name": "Evolution 42 3086-3131"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "2b6214bf-058e-4212-8d19-74265b77162e",
+                    "leftValue": "={{ $json.messageType }}",
+                    "rightValue": "conversation",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "1986a53a-4b4b-435e-9ca9-9c1adbe3db45",
+                    "leftValue": "={{ $json.messageType }}",
+                    "rightValue": "audioMessage",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        2144,
+        -416
+      ],
+      "id": "37387de1-9366-4e45-8281-c0f0d18c9459",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e852fd23-c04a-4254-98a1-e8e937110435",
+              "name": "message",
+              "value": "={{ $('Dados').item.json.conversation }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2288,
+        -416
+      ],
+      "id": "5c977d99-b716-482a-ac81-7ceaab5feb98",
+      "name": "setTextMessage"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "0a769c0b-65ce-45b3-8284-51f528823f8a",
+              "name": "message",
+              "value": "={{ $json.message }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2432,
+        -416
+      ],
+      "id": "7f3cdba1-bab1-4564-a432-16c443efc591",
+      "name": "Message"
+    },
+    {
+      "parameters": {
+        "operation": "push",
+        "list": "={{ $('Dados').item.json.instance }} {{ $('Dados').item.json.remoteJid }} temp",
+        "messageData": "={{ $json.message }}",
+        "tail": true
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        1840,
+        -208
+      ],
+      "id": "c8343523-6b0d-4ea0-b2af-1c526049f10c",
+      "name": "Redis",
+      "credentials": {
+        "redis": {
+          "id": "fUCkg1LOGgIIBPy8",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 2
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1968,
+        -208
+      ],
+      "id": "3c42c705-f913-4e38-81d1-304e97934ef6",
+      "name": "Wait",
+      "webhookId": "841fcf1c-2665-4b69-a57c-0d9f216dfb24"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "propertyName": "messages",
+        "key": "={{ $('Dados').item.json.instance }} {{ $('Dados').item.json.remoteJid }} temp",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        2096,
+        -208
+      ],
+      "id": "99a7433f-670e-4a57-9704-94f4cdd66ea4",
+      "name": "Redis1",
+      "credentials": {
+        "redis": {
+          "id": "fUCkg1LOGgIIBPy8",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "b424a90f-4b3b-41dd-ab68-16cfa2cf1d67",
+              "leftValue": "={{ $json.messages.last() }}",
+              "rightValue": "={{ $('Message').item.json.message }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2224,
+        -208
+      ],
+      "id": "ab315ae6-6ba5-4c1c-b8b1-81c8736e8bbb",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "={{ $('Dados').item.json.instance }} {{ $('Dados').item.json.remoteJid }} temp"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        2352,
+        -208
+      ],
+      "id": "6002e758-a0c7-45a3-9857-115752aec98b",
+      "name": "Redis2",
+      "credentials": {
+        "redis": {
+          "id": "fUCkg1LOGgIIBPy8",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e9bd71b0-c975-4f33-a324-dde72ad2ffd8",
+              "name": "message",
+              "value": "={{ $('Redis1').item.json.messages.join(\" \") }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2480,
+        -208
+      ],
+      "id": "3abd672c-bfa7-48d6-9383-c019c42d8480",
+      "name": "MensagemFinal"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+      "typeVersion": 1,
+      "position": [
+        2256,
+        176
+      ],
+      "id": "fd5172ed-9a6a-47d0-907c-6ec0c876202f",
+      "name": "Calculator"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolThink",
+      "typeVersion": 1.1,
+      "position": [
+        2128,
+        176
+      ],
+      "id": "74ab06e1-f307-4d0b-833f-7ad19595367d",
+      "name": "Think"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Dados",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Dados": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Enviar texto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "setTextMessage",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "setTextMessage": {
+      "main": [
+        [
+          {
+            "node": "Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message": {
+      "main": [
+        [
+          {
+            "node": "Redis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Redis1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis1": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Redis2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Redis2": {
+      "main": [
+        [
+          {
+            "node": "MensagemFinal",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MensagemFinal": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculator": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Think": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "America/Sao_Paulo",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "versionId": "555a6dab-1fc7-4048-90d2-3ac29b74133f",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "4cc8db84bd208bcbff3f0f1b5d12c5505cfd4aea7dcc59e06d5cf838d0f7b302"
+  },
+  "id": "Hr5efTPh6fRo2Yfq",
+  "tags": []
+}
